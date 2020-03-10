@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                def mvnHome = tool name: 'Jenkins-maven', type: 'maven'
+				def mvnCMD = "${mvnHome}/bin/mvn"
+				sh "${mvnCMD} clean package"
             }
         }
         stage('Test') {
